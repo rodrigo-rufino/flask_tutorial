@@ -10,5 +10,4 @@ flaskr.egg-info/top_level.txt
 flaskr/static/style.css
 flaskr/templates/layout.html
 flaskr/templates/login.html
-flaskr/templates/remove_entries.html
 flaskr/templates/show_entries.html
