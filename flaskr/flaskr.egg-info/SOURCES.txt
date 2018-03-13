@@ -7,3 +7,8 @@ flaskr.egg-info/SOURCES.txt
 flaskr.egg-info/dependency_links.txt
 flaskr.egg-info/requires.txt
 flaskr.egg-info/top_level.txt
+flaskr/static/style.css
+flaskr/templates/layout.html
+flaskr/templates/login.html
+flaskr/templates/remove_entries.html
+flaskr/templates/show_entries.html
