@@ -73,6 +73,23 @@ def add_entry():
     return redirect(url_for('show_entries'))
 
 
+@app.route('/signin', methods=['GET', 'POST'])
+def sign_in():
+    error = None
+    render_template('sign_in.html', error=error)
+    print request.method
+
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+        db = get_db()
+        db.execute('insert into users (username, password) values (?, ?)',
+                   [username, password])
+        db.commit()
+        return redirect(url_for('show_entries'))
+    return render_template('index.html', entries=entries)
+
+
 @app.route('/remove', methods=['POST'])
 def remove_entry():
     if not session.get('logged_in'):
@@ -87,11 +104,26 @@ def remove_entry():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
+
     error = None
     if request.method == 'POST':
-        if request.form['username'] != app.config['USERNAME']:
+        db = get_db()
+        username = request.form['username']
+        password = request.form['password']
+        cur = db.execute('select * from users where username = (?) \
+                                                and password = (?)',
+                         (username, password))
+        try:
+            userdata = cur.fetchall()
+            user = userdata[0][1]
+            psswrd = userdata[0][2]
+        except IndexError:
+            error = 'Invalid username and password'
+            return render_template('login.html', error=error)
+
+        if request.form['username'] != user:
             error = 'Invalid username'
-        elif request.form['password'] != app.config['PASSWORD']:
+        elif request.form['password'] != psswrd:
             error = 'Invalid password'
         else:
             session['logged_in'] = True

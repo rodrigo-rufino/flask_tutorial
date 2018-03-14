@@ -1,0 +1,21 @@
+{% extends "layout.html" %}
+{% block div %}
+    <h2>Sign in</h2>
+    <form action="{{ url_for('sign_in') }}" method=post class=signin >
+        <dl>
+        <dt>Username:
+        <dd><input type=text size=30 name=username>
+        <dt>Password:
+        <dd><input type=text size=30 name=password>
+        <dd><input type=submit value="Sign in">
+        </dl>
+    </form>
+    </form>
+  <ul class=entries>
+  {% for entry in entries %}
+    <li><h2>{{ entry.title }}</h2>{{ entry.text|safe }}
+  {% else %}
+    <li><em>Unbelievable.  No entries here so far</em>
+  {% endfor %}
+  </ul>
+{% endblock %}

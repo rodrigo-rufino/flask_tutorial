@@ -104,3 +104,4 @@ flaskr/templates/index.html
 flaskr/templates/layout.html
 flaskr/templates/login.html
 flaskr/templates/show_entries.html
+flaskr/templates/sign_in.html
